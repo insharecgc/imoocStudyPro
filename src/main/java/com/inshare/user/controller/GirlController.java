@@ -1,8 +1,10 @@
 package com.inshare.user.controller;
 
 import com.inshare.user.domain.Girl;
+import com.inshare.user.domain.Result;
 import com.inshare.user.repository.GirlRepository;
 import com.inshare.user.service.GirlService;
+import com.inshare.user.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +17,7 @@ import java.util.Optional;
 public class GirlController {
 
     @Autowired
-    private GirlRepository grilRepository;
+    private GirlRepository girlRepository;
 
     @Autowired
     private GirlService girlService;
@@ -23,13 +25,13 @@ public class GirlController {
     //查询所有
     @GetMapping(value = "/girl")
     public List<Girl> girlList() {
-        return grilRepository.findAll();
+        return girlRepository.findAll();
     }
 
     //根据id查询
     @GetMapping(value = "/girl/{id}")
     public Girl girlOne(@PathVariable("id") Integer id) {
-        Optional<Girl> opGirl =  grilRepository.findById(id);
+        Optional<Girl> opGirl =  girlRepository.findById(id);
         if (opGirl.isPresent()) {
             return opGirl.get();
         }
@@ -39,19 +41,19 @@ public class GirlController {
     //名称模糊查询
     @PostMapping(value = "/girl")
     public List<Girl> girlListByName(@RequestParam("name") String name) {
-        return grilRepository.findByNameContaining(name);
+        return girlRepository.findByNameContaining(name);
     }
 
     //添加(@Valid验证)
     @PostMapping(value = "/addgirl")
-    public Girl addGirl(@Valid Girl girl, BindingResult bindingResult) {
+    public Result<Girl> addGirl(@Valid Girl girl, BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
-            System.out.println(bindingResult.getFieldError().getDefaultMessage());
-            return null;
+            return ResultUtil.error(-1, bindingResult.getFieldError().getDefaultMessage());
         }
         girl.setName(girl.getName());
         girl.setAge(girl.getAge());
-        return grilRepository.save(girl);
+
+        return ResultUtil.success(girlRepository.save(girl));
     }
 
     //更新
@@ -63,17 +65,22 @@ public class GirlController {
         girl.setId(id);
         girl.setName(name);
         girl.setAge(age);
-        return grilRepository.save(girl);
+        return girlRepository.save(girl);
     }
 
     //根据id删除
     @DeleteMapping(value = "/girl/{id}")
     public void deleteGirl(@PathVariable("id") Integer id){
-        grilRepository.deleteById(id);
+        girlRepository.deleteById(id);
     }
 
     @PostMapping(value = "/girl/two")
     public void addTwoGirl(){
         girlService.insertTwo();
+    }
+
+    @GetMapping(value = "/girl/getAge/{id}")
+    public void getAge(@PathVariable("id") Integer id) throws Exception {
+        girlService.getAge(id);
     }
 }

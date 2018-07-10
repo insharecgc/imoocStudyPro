@@ -1,10 +1,15 @@
 package com.inshare.user.service;
 
+import com.inshare.user.enums.ResultEnum;
+import com.inshare.user.exception.GirlException;
 import com.inshare.user.repository.GirlRepository;
 import com.inshare.user.domain.Girl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.Optional;
 
 @Service
 public class GirlService {
@@ -23,5 +28,29 @@ public class GirlService {
         girl2.setName("Maxnametolong");
         girl2.setAge(18);
         girlRepository.save(girl2);
+    }
+
+    public void getAge(Integer id) throws Exception{
+        Optional<Girl> opGirl =  girlRepository.findById(id);
+        if (opGirl.isPresent()) {
+            Integer age = opGirl.get().getAge();
+            if (age < 18) {
+                throw new GirlException(ResultEnum.LITTER);
+            }else if (age > 60) {
+                throw new GirlException(ResultEnum.BIGGER);
+            }else {
+                throw new GirlException(ResultEnum.AGE_OK);
+            }
+        }else{
+            throw new GirlException(ResultEnum.QUERRY_NO);
+        }
+    }
+
+    public Girl getGirl(Integer id) {
+        Optional<Girl> opGirl =  girlRepository.findById(id);
+        if (opGirl.isPresent()) {
+            return opGirl.get();
+        }
+        return null;
     }
 }
