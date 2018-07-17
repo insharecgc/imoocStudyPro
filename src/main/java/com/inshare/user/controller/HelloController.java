@@ -1,5 +1,6 @@
 package com.inshare.user.controller;
 
+import com.inshare.HelloService;
 import com.inshare.user.properties.GirlProperties;
 import com.inshare.user.properties.ResourceProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class HelloController {
     @Autowired
     private ResourceProperties resourceProperties;
 
+    @Autowired
+    private HelloService helloService;
+
     @Value("${content}")
     private String content;
 
@@ -26,6 +30,12 @@ public class HelloController {
     public String say(){
         return content +  "<br/>" + girlProperties.getCupSize();
     }
+
+    @GetMapping(value="/testAutoConf")
+    public String testAutoConfig(){
+        return helloService.sayHello();
+    }
+
 
     @GetMapping(value = "/resource")
     public String resource(){

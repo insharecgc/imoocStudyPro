@@ -113,6 +113,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
+
+		<!--自定义带默认配置的jar包-->
+		<dependency>
+			<groupId>com.inshare</groupId>
+			<artifactId>com.inshare.mystarter</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
