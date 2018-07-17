@@ -1,7 +1,7 @@
 package com.inshare.user.controller;
 
-import com.inshare.user.domain.Girl;
-import com.inshare.user.domain.Result;
+import com.inshare.user.entity.Result;
+import com.inshare.user.pojo.Girl;
 import com.inshare.user.repository.GirlRepository;
 import com.inshare.user.service.GirlService;
 import com.inshare.user.utils.ResultUtil;
@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,6 +53,8 @@ public class GirlController {
         }
         girl.setName(girl.getName());
         girl.setAge(girl.getAge());
+        girl.setPassword(girl.getPassword());
+        girl.setCreateTime(new Date());
 
         return ResultUtil.success(girlRepository.save(girl));
     }
@@ -82,5 +85,10 @@ public class GirlController {
     @GetMapping(value = "/girl/getAge/{id}")
     public void getAge(@PathVariable("id") Integer id) throws Exception {
         girlService.getAge(id);
+    }
+
+    @GetMapping(value = "/girl/age/{age}")
+    public List<Girl> getByAge(@PathVariable("age") Integer age) {
+        return girlService.getGirlByAge(age);
     }
 }

@@ -1,14 +1,15 @@
 package com.inshare.user.service;
 
+import com.inshare.user.pojo.Girl;
+import com.inshare.user.mapper.GirlMapper;
 import com.inshare.user.enums.ResultEnum;
 import com.inshare.user.exception.GirlException;
 import com.inshare.user.repository.GirlRepository;
-import com.inshare.user.domain.Girl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.CriteriaBuilder;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,6 +17,9 @@ public class GirlService {
 
     @Autowired
     private GirlRepository girlRepository;
+
+    @Autowired
+    private GirlMapper girlMapper;
 
     @Transactional(readOnly = true)
     public void insertTwo(){
@@ -52,5 +56,9 @@ public class GirlService {
             return opGirl.get();
         }
         return null;
+    }
+
+    public List<Girl> getGirlByAge(Integer age) {
+        return girlMapper.selectAll();
     }
 }

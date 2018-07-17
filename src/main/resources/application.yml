@@ -7,7 +7,27 @@ spring:
       url: jdbc:mysql://127.0.0.1:3306/test
       driver-class-name: com.mysql.jdbc.Driver
   jpa:
-    hibernate:
-      ddl-auto: update
+#    hibernate:
+#      ddl-auto: update
     show-sql: true
+  redis:
+    database: 1
+    host: 127.0.0.1
+    port: 6379
+    password: 123
 
+mybatis:
+  type-aliases-package: com.inshare.user.pojo
+  mapper-locations: classpath:mapper/*.xml
+
+mapper:
+  mappers:
+    - com.inshare.user.utils.MyMapper
+  not-empty: false
+  identity: MYSQL
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

@@ -1,4 +1,4 @@
-package com.inshare.user.domain;
+package com.inshare.user.entity;
 
 /**
  * Http请求返回的最外层对象

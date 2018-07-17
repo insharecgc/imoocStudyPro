@@ -1,7 +1,11 @@
 server:
   port: 8080
+  tomcat:
+    uri-encoding: UTF-8
+#  address: 192.168.1.103
 #  servlet:
-#    context-path: /ProjectName
+#    context-path: /ProjectName #配置项目发布路径
+
 
 girl:
   cupSize: B

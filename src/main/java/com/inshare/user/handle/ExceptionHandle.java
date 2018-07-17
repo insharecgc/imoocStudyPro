@@ -1,6 +1,6 @@
 package com.inshare.user.handle;
 
-import com.inshare.user.domain.Result;
+import com.inshare.user.entity.Result;
 import com.inshare.user.enums.ResultEnum;
 import com.inshare.user.exception.GirlException;
 import com.inshare.user.utils.ResultUtil;

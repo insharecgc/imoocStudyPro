@@ -1,6 +1,6 @@
 package com.inshare.user.utils;
 
-import com.inshare.user.domain.Result;
+import com.inshare.user.entity.Result;
 
 public class ResultUtil {
     public static Result success(Object object) {

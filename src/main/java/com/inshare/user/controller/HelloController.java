@@ -1,6 +1,7 @@
 package com.inshare.user.controller;
 
 import com.inshare.user.properties.GirlProperties;
+import com.inshare.user.properties.ResourceProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/hello")
 public class HelloController {
+
     @Autowired
     private GirlProperties girlProperties;
+
+    @Autowired
+    private ResourceProperties resourceProperties;
 
     @Value("${content}")
     private String content;
@@ -20,6 +25,13 @@ public class HelloController {
     @GetMapping(value={"/say","/hi"})
     public String say(){
         return content +  "<br/>" + girlProperties.getCupSize();
+    }
+
+    @GetMapping(value = "/resource")
+    public String resource(){
+        return resourceProperties.getName()+" -- "
+                + resourceProperties.getLanguage() + " -- "
+                + resourceProperties.getAge();
     }
 
     @GetMapping(value = "/test")
