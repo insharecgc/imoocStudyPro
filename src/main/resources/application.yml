@@ -33,4 +33,4 @@ pagehelper:
   params: count=countSql
 
 hello:
-  msg: 123456qwer
+  msg: 这是自动配置测试内容

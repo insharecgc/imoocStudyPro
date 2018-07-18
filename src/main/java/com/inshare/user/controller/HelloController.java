@@ -36,7 +36,6 @@ public class HelloController {
         return helloService.sayHello();
     }
 
-
     @GetMapping(value = "/resource")
     public String resource(){
         return resourceProperties.getName()+" -- "
