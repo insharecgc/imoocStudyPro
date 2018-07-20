@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface GirlRepository extends JpaRepository<Girl, Integer> {
 
-    public List<Girl> findByNameContaining(String name);
+    List<Girl> findByNameContaining(String name);
 }
