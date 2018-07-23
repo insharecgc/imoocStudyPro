@@ -2,7 +2,7 @@ package com.inshare.user.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.inshare.user.mapper.SysUserMapper;
-import com.inshare.user.pojo.SysUser;
+import com.inshare.user.entity.SysUser;
 import com.inshare.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

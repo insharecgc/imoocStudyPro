@@ -1,7 +1,7 @@
 package com.inshare.user.controller;
 
 import com.inshare.user.entity.Result;
-import com.inshare.user.pojo.SysUser;
+import com.inshare.user.entity.SysUser;
 import com.inshare.user.service.UserService;
 import com.inshare.user.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;

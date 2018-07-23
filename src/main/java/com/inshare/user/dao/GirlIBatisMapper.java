@@ -1,6 +1,6 @@
 package com.inshare.user.dao;
 
-import com.inshare.user.pojo.Girl;
+import com.inshare.user.entity.Girl;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

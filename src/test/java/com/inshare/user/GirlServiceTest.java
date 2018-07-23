@@ -1,6 +1,6 @@
 package com.inshare.user;
 
-import com.inshare.user.pojo.Girl;
+import com.inshare.user.entity.Girl;
 import com.inshare.user.service.GirlService;
 import org.junit.Assert;
 import org.junit.Test;

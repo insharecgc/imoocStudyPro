@@ -1,6 +1,6 @@
 package com.inshare.user.repository;
 
-import com.inshare.user.pojo.Girl;
+import com.inshare.user.entity.Girl;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.inshare.user.service;
 
-import com.inshare.user.pojo.SysUser;
+import com.inshare.user.entity.SysUser;
 
 import java.util.List;
 

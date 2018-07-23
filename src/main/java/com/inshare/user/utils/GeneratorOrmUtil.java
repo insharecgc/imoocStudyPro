@@ -6,6 +6,7 @@ import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.internal.DefaultShellCallback;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +16,9 @@ public class GeneratorOrmUtil {
         List<String> warnings = new ArrayList<String>();
         boolean overwrite = true;
         // 指定 逆向工程配置文件
-        File configFile = new File("D:/Spring Boot Projects/user/target/classes/config/generatorConfig.xml");
+        InputStream inputStream = this.getClass().getResourceAsStream("/config/generatorConfig.xml");
         ConfigurationParser cp = new ConfigurationParser(warnings);
-        Configuration config = cp.parseConfiguration(configFile);
+        Configuration config = cp.parseConfiguration(inputStream);
         DefaultShellCallback callback = new DefaultShellCallback(overwrite);
         MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config,
                 callback, warnings);

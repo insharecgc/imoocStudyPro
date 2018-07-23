@@ -1,4 +1,4 @@
-package com.inshare.user.pojo;
+package com.inshare.user.entity;
 
 import java.util.Date;
 import javax.persistence.*;

@@ -1,4 +1,4 @@
-package com.inshare.user.pojo;
+package com.inshare.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;

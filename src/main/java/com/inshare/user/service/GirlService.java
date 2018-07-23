@@ -1,6 +1,6 @@
 package com.inshare.user.service;
 
-import com.inshare.user.pojo.Girl;
+import com.inshare.user.entity.Girl;
 import com.inshare.user.mapper.GirlMapper;
 import com.inshare.user.enums.ResultEnum;
 import com.inshare.user.exception.GirlException;

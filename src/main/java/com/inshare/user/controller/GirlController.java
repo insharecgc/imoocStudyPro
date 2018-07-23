@@ -1,7 +1,7 @@
 package com.inshare.user.controller;
 
 import com.inshare.user.entity.Result;
-import com.inshare.user.pojo.Girl;
+import com.inshare.user.entity.Girl;
 import com.inshare.user.repository.GirlRepository;
 import com.inshare.user.service.GirlService;
 import com.inshare.user.utils.ResultUtil;
