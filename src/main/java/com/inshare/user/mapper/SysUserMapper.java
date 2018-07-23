@@ -1,7 +1,7 @@
 package com.inshare.user.mapper;
 
 import com.inshare.user.entity.SysUser;
-import com.inshare.user.utils.MyMapper;
+import tk.mybatis.mapper.common.Mapper;
 
-public interface SysUserMapper extends MyMapper<SysUser> {
+public interface SysUserMapper extends Mapper<SysUser> {
 }

@@ -21,8 +21,6 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
 
 mapper:
-  mappers:
-    - com.inshare.user.utils.MyMapper
   not-empty: false
   identity: MYSQL
 

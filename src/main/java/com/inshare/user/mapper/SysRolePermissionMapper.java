@@ -1,7 +1,7 @@
 package com.inshare.user.mapper;
 
 import com.inshare.user.entity.SysRolePermission;
-import com.inshare.user.utils.MyMapper;
+import tk.mybatis.mapper.common.Mapper;
 
-public interface SysRolePermissionMapper extends MyMapper<SysRolePermission> {
+public interface SysRolePermissionMapper extends Mapper<SysRolePermission> {
 }
