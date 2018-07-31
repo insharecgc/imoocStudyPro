@@ -2,7 +2,6 @@ package com.inshare.user.controller;
 
 import com.inshare.user.properties.GirlProperties;
 import com.inshare.user.properties.ResourceProperties;
-import com.inshare.user.service.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
