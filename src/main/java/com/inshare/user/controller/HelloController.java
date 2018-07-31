@@ -1,8 +1,8 @@
 package com.inshare.user.controller;
 
-import com.inshare.HelloService;
 import com.inshare.user.properties.GirlProperties;
 import com.inshare.user.properties.ResourceProperties;
+import com.inshare.user.service.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,5 +46,10 @@ public class HelloController {
     @GetMapping(value = "/test")
     public String test(@RequestParam(value = "id", required = false, defaultValue = "0") Integer myId){
         return "id: " + myId;
+    }
+
+    @GetMapping(value="/sayHi")
+    public String sayHi(){
+        return helloService.sayHi();
     }
 }

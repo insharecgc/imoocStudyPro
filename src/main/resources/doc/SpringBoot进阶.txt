@@ -1,0 +1,66 @@
+1.使用@Valid进行表单验证
+  
+  关于自动Id
+  String类型的Id
+  @GeneratedValue(generator="system-uuid")
+  @GenericGenerator(name="system-uuid",strategy="uuid")
+
+  int 或 long的id
+   @GeneratedValue(strategy=GenerationType.IDENTITY)
+
+  方便的统一的表单验证 
+  Entity 定义
+  @Min(value = 1, message = "age必须大于1")
+  @Max(value = 120, message = "age不能大于120")
+  @Email(message = "邮箱格式不正确")
+  @NotEmpty(message = "xxx不能为空")
+
+
+2.使用AOP处理请求
+
+  作为Spring两大核心之一，必须使用
+
+  日志功能
+  调用方法之前和之后的处理
+
+  一、在类上注解
+    @Aspect
+    @Component
+
+  二、定义切点
+    @Pointcut("execution(public * com.inshare.user.controller.GirlController.*(..))")
+    方法 public void log(){}
+
+  三、调用方法之前
+    @Before("log()")
+    public void doBefore(JoinPoint joinPoint){...}
+
+  四、方法返回给用户之后
+    @AfterReturning(returning = "object",pointcut = "log()")
+    public void doAfterReturning(Object object){...}
+
+
+3.统一异常处理
+  @ControllerAdvice  针对类的注解
+
+  以下两个注解针对方法
+  @ExceptionHandler(value = Exception.class)
+  @ResponseBody
+
+
+
+4.单元测试
+
+  针对Service和Api进行测试 
+
+  类的注解
+  @RunWith(SpringRunner.class)
+  @SpringBootTest
+  @AutoConfigureMockMvc
+
+  针对Controller的测试，模拟访问地址，判断返回结果
+  @Autowired
+  private MockMvc mvc;
+  在@Test注解下的方法里
+  mvc.perform(MockMvcRequestBuilders.get("/uri"))
+             .andExpect(MockMvcResultMatchers.status().isOk());
