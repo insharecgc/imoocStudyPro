@@ -14,7 +14,7 @@ spring:
     database: 1
     host: 127.0.0.1
     port: 6379
-    password: 123
+    password:
 
 mybatis:
   type-aliases-package: com.inshare.user.entity
@@ -32,3 +32,7 @@ pagehelper:
 
 hello:
   msg: 这是自动配置测试内容
+
+logging:
+  level:
+    com.inshare.user.mapper: trace

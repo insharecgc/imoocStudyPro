@@ -4,15 +4,14 @@ import com.inshare.user.entity.Result;
 import com.inshare.user.entity.Girl;
 import com.inshare.user.repository.GirlRepository;
 import com.inshare.user.service.GirlService;
+import com.inshare.user.utils.RedisLock;
 import com.inshare.user.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 public class GirlController {
@@ -23,16 +22,56 @@ public class GirlController {
     @Autowired
     private GirlService girlService;
 
-    //查询所有
+    @Autowired
+    private RedisLock redisLock;
+
+    private String keyLock = "girl_Lock";
+
+    static Map<String, Integer> products;
+
+    static {
+        products = new HashMap<>();
+        products.put("123", 100000);
+    }
+
+    // 测试分布式锁
+    @GetMapping("/testlock")
+    public String testlock() {
+        String retMsg = "";
+        if (!redisLock.lock(keyLock)) {
+            return "人太多了，请换个姿势再试试。";
+        }
+        int num = products.get("123");
+        if (num == 0) {
+            retMsg = "已被秒杀完";
+        } else {
+            products.put("123", --num);
+            retMsg = "还剩余: " + num;
+        }
+        redisLock.unlock(keyLock);
+        return retMsg;
+    }
+
+    // 查询所有
     @GetMapping(value = "/girl")
     public List<Girl> girlList() {
-        return girlRepository.findAll();
+        List<Girl> ret = null;
+        try {
+            if (redisLock.lock(keyLock)) {
+                ret = girlRepository.findAll();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            redisLock.unlock(keyLock);
+            return ret;
+        }
     }
 
     //根据id查询
     @GetMapping(value = "/girl/{id}")
     public Girl girlOne(@PathVariable("id") Integer id) {
-        Optional<Girl> opGirl =  girlRepository.findById(id);
+        Optional<Girl> opGirl = girlRepository.findById(id);
         if (opGirl.isPresent()) {
             return opGirl.get();
         }
@@ -48,7 +87,7 @@ public class GirlController {
     //添加(@Valid验证)
     @PostMapping(value = "/addgirl")
     public Result<Girl> addGirl(@Valid Girl girl, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return ResultUtil.error(-1, bindingResult.getFieldError().getDefaultMessage());
         }
         girl.setName(girl.getName());
@@ -62,8 +101,8 @@ public class GirlController {
     //更新
     @PutMapping(value = "/girl/{id}")
     public Girl updateGirl(@PathVariable("id") Integer id,
-                        @RequestParam("name") String name,
-                        @RequestParam("age") Integer age){
+                           @RequestParam("name") String name,
+                           @RequestParam("age") Integer age) {
         Girl girl = new Girl();
         girl.setId(id);
         girl.setName(name);
@@ -73,12 +112,12 @@ public class GirlController {
 
     //根据id删除
     @DeleteMapping(value = "/girl/{id}")
-    public void deleteGirl(@PathVariable("id") Integer id){
+    public void deleteGirl(@PathVariable("id") Integer id) {
         girlRepository.deleteById(id);
     }
 
     @PostMapping(value = "/girl/two")
-    public void addTwoGirl(){
+    public void addTwoGirl() {
         girlService.insertTwo();
     }
 
