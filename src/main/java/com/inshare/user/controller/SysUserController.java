@@ -5,6 +5,7 @@ import com.inshare.user.entity.SysUser;
 import com.inshare.user.service.UserService;
 import com.inshare.user.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -15,6 +16,7 @@ import java.util.List;
 public class SysUserController {
 
     @Autowired
+    @Qualifier("userServiceImpl")
     private UserService userService;
 
     @PostMapping(value = "/save")

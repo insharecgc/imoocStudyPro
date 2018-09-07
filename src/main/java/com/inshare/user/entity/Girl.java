@@ -7,8 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @Entity
@@ -17,16 +19,20 @@ public class Girl {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
+    @NotEmpty(message = "姓名不能为空")
     private String name;
 
-    @JsonIgnore
+//    @Email(message = "邮箱格式不正确")
+//    private String email;
+
+    //@JsonIgnore
     private String password;
 
     @Min(value = 1, message = "age必须大于1")
     @Max(value = 120, message = "age不能大于120")
     private Integer age;
 
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh", timezone = "GMT+8")
+    //@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh", timezone = "GMT+8")
     private Date createTime;
 
     private String desc;
