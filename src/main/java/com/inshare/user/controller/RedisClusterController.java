@@ -17,7 +17,6 @@ import redis.clients.jedis.JedisCluster;
 @RequestMapping("redisCluster")
 public class RedisClusterController {
 
-    /*
     @Autowired
     private JedisCluster jedisCluster;
 
@@ -38,5 +37,4 @@ public class RedisClusterController {
         String value = jedisCluster.get(key);
         return value;
     }
-    */
 }

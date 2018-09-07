@@ -12,10 +12,10 @@ import java.util.Set;
  * @author Guichao
  * @since 2018/9/6
  */
-//@Configuration
+@Configuration
 public class RedisClusterConfigure {
 
-//    @Bean
+    @Bean
     public JedisCluster getRedisCluster() {
         Set<HostAndPort> jedisClusterNodes = new HashSet<HostAndPort>();
         jedisClusterNodes.add(new HostAndPort("192.168.1.104",7001));
