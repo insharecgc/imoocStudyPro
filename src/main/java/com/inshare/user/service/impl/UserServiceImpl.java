@@ -5,6 +5,7 @@ import com.inshare.user.mapper.SysUserMapper;
 import com.inshare.user.entity.SysUser;
 import com.inshare.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
@@ -23,6 +24,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @CachePut(cacheNames = "s_user", key = "'_'.concat(#user.id)")
     public void updateUser(SysUser user) {
         sysUserMapper.updateByPrimaryKeySelective(user);
     }
@@ -33,6 +35,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @CachePut(cacheNames = "s_user", key = "'_'.concat(#userId)")
     public SysUser queryUserById(String userId) {
         return sysUserMapper.selectByPrimaryKey(userId);
     }

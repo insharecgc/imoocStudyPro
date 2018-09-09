@@ -7,6 +7,8 @@ import com.inshare.user.service.GirlService;
 import com.inshare.user.utils.RedisLock;
 import com.inshare.user.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,21 +57,12 @@ public class GirlController {
     // 查询所有
     @GetMapping(value = "/girl")
     public List<Girl> girlList() {
-        List<Girl> ret = null;
-        try {
-            if (redisLock.lock(keyLock)) {
-                ret = girlRepository.findAll();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            redisLock.unlock(keyLock);
-            return ret;
-        }
+        return girlRepository.findAll();
     }
 
     //根据id查询
     @GetMapping(value = "/girl/{id}")
+    @Cacheable(cacheNames = "girl", key = "'girl_'.concat(#id)")
     public Girl girlOne(@PathVariable("id") Integer id) {
         Optional<Girl> opGirl = girlRepository.findById(id);
         if (opGirl.isPresent()) {
@@ -99,14 +92,9 @@ public class GirlController {
     }
 
     //更新
-    @PutMapping(value = "/girl/{id}")
-    public Girl updateGirl(@PathVariable("id") Integer id,
-                           @RequestParam("name") String name,
-                           @RequestParam("age") Integer age) {
-        Girl girl = new Girl();
-        girl.setId(id);
-        girl.setName(name);
-        girl.setAge(age);
+    @PostMapping(value = "/saveGirl")
+    @CachePut(cacheNames = "girl", key = "'girl_'.concat(#id)")
+    public Girl updateGirl(Girl girl) {
         return girlRepository.save(girl);
     }
 

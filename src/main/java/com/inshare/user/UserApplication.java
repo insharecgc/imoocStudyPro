@@ -1,5 +1,6 @@
 package com.inshare.user;
 
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import tk.mybatis.spring.annotation.MapperScan;
@@ -14,6 +15,8 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableScheduling
 //开启异步调用方法
 @EnableAsync
+// 开启缓存支持
+@EnableCaching
 public class UserApplication {
 
 	public static void main(String[] args) {

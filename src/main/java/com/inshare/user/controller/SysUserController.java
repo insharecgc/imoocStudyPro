@@ -26,7 +26,7 @@ public class SysUserController {
     }
 
     @GetMapping(value = "/get/{id}")
-    public SysUser getAllUser(@PathVariable("id")String id){
+    public SysUser getUser(@PathVariable("id")String id){
         return userService.queryUserById(id);
     }
 
