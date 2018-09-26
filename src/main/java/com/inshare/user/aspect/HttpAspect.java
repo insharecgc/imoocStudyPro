@@ -10,10 +10,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
-//Filter是Servlet规范规定的，不属于spring框架，也是用于请求的拦截。
+// Filter是Servlet规范规定的，不属于spring框架，也是用于请求的拦截。
 // 但是它适合更粗粒度的拦截，在请求前后做一些编解码处理、日志记录等
 
-//HandlerInterceptoer拦截的是请求地址，所以针对请求地址做一些验证、预处理等操作比较合适
+// HandlerInterceptor拦截的是请求地址，所以针对请求地址做一些验证、预处理等操作比较合适
 
 //@Aspect注解拦截器是aop拦截器，针对方法的即MethodInterceptor
 @Aspect

@@ -19,6 +19,7 @@ spring:
 mybatis:
   type-aliases-package: com.inshare.user.entity
   mapper-locations: classpath:mapper/*.xml
+  configLocation: classpath:mybatis/mybatis-config.xml
 
 mapper:
   not-empty: false
