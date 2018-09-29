@@ -1,6 +1,7 @@
 package com.inshare.user;
 
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import tk.mybatis.spring.annotation.MapperScan;
@@ -17,6 +18,8 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableAsync
 // 开启缓存支持
 @EnableCaching
+// 默认是开启aop的，设置proxyTargetClass为true表示使用cglib，默认为false表示使用动态代理实现的
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class UserApplication {
 
 	public static void main(String[] args) {
